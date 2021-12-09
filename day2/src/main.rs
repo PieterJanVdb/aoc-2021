@@ -19,6 +19,7 @@ fn calculate_position(moves: &[(String, i32)]) -> (i32, i32) {
         _ => acc,
     });
 
+    // aim is masquerading as depth of part 1 in this case
     (horizontal * aim, horizontal * depth)
 }
 
