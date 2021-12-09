@@ -12,12 +12,17 @@ fn get_moves() -> Vec<(String, i32)> {
 }
 
 fn calculate_position(moves: &[(String, i32)]) -> (i32, i32) {
-    let (horizontal, depth, aim) = moves.iter().fold((0, 0, 0), |acc, x| match x.0.as_str() {
-        "forward" => (acc.0 + x.1, acc.1 + x.1 * acc.2, acc.2),
-        "down" => (acc.0, acc.1, acc.2 + x.1),
-        "up" => (acc.0, acc.1, acc.2 - x.1),
-        _ => acc,
-    });
+    let (horizontal, depth, aim) =
+        moves
+            .iter()
+            .fold((0, 0, 0), |(horizontal, depth, aim), (op, n)| {
+                match op.as_str() {
+                    "forward" => (horizontal + n, depth + n * aim, aim),
+                    "down" => (horizontal, depth, aim + n),
+                    "up" => (horizontal, depth, aim - n),
+                    _ => (horizontal, depth, aim),
+                }
+            });
 
     // aim is masquerading as depth of part 1 in this case
     (horizontal * aim, horizontal * depth)
