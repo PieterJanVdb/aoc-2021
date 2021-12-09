@@ -5,8 +5,8 @@ fn get_moves() -> Vec<(String, i32)> {
         .expect("Unable to read file")
         .lines()
         .map(|s| {
-            let (dir, amount) = s.split_at(s.find(' ').unwrap());
-            (dir.to_string(), amount.trim().parse::<i32>().unwrap())
+            let (op, amount) = s.split_at(s.find(' ').unwrap());
+            (op.to_string(), amount.trim().parse::<i32>().unwrap())
         })
         .collect()
 }
