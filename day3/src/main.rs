@@ -31,11 +31,9 @@ fn filter(input: &[Vec<u32>], index: usize, decider: fn(usize, usize) -> bool) -
 }
 
 fn calculate_part1(input: &[Vec<u32>]) -> u32 {
-    let counts = input
-        .iter()
-        .map(|x| x.clone())
-        .reduce(|acc, x| acc.iter().zip(x.iter()).map(|(a, b)| a + b).collect())
-        .unwrap();
+    let counts = input.iter().fold(vec![0; 12], |acc, x| {
+        acc.iter().zip(x.iter()).map(|(a, b)| a + b).collect()
+    });
 
     let bits = counts
         .iter()
